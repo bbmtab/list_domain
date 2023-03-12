@@ -1,7 +1,7 @@
 Payload:        
-- DOMAIN-SUFFIX,mega.nz
-- DOMAIN-SUFFIX,zippyshare.com  
-- DOMAIN-SUFFIX,mediafire.com   
-- DOMAIN-SUFFIX,terabox.com 
-- DOMAIN-SUFFIX,mirrobox.com 
-- DOMAIN-SUFFIX,box.com   
+  - DOMAIN-SUFFIX,mega.nz
+  - DOMAIN-SUFFIX,zippyshare.com  
+  - DOMAIN-SUFFIX,mediafire.com   
+  - DOMAIN-SUFFIX,terabox.com 
+  - DOMAIN-SUFFIX,mirrobox.com
+  - DOMAIN-SUFFIX,box.com     
