@@ -1,10 +1,8 @@
-#
-#
-Payload:
-- "+..mega.nz"
+payload:
+- "+.mega.nz"
 - "+.zippyshare.com"
-- "DOMAIN-SUFFIX,mediafire.com"
-- DOMAIN-SUFFIX,terabox.com 
-- DOMAIN-SUFFIX,mirrobox.com
-- DOMAIN-SUFFIX,box.com     
-- DOMAIN-SUFFIX,krakenfiles.com
+- "+.mediafire.com"
+- "+.terabox.com"
+- "+.mirrobox.com"
+- "+.box.com"
+- "+.krakenfiles.com"
