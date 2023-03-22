@@ -151,6 +151,7 @@ payload:
 - DOMAIN-KEYWORD,bilibili
 # Youku
 - "+.youku.com"
+- "+.bixi.alicdn.com"
 # &gt; Wiz smartgateway philips
 - DOMAIN-SUFFIX,wiz.world
 - DOMAIN,wizconnected.helpshift.com
