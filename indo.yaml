@@ -149,6 +149,8 @@ payload:
 - DOMAIN-SUFFIX,upos-hz-mirrorakam.akamaized.net
 - DOMAIN-KEYWORD,bstar
 - DOMAIN-KEYWORD,bilibili
+# Youku
+- "+.youku.com"
 # &gt; Wiz smartgateway philips
 - DOMAIN-SUFFIX,wiz.world
 - DOMAIN,wizconnected.helpshift.com
