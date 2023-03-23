@@ -152,6 +152,7 @@ payload:
 # Youku
 - "+.youku.com"
 - "+.bixi.alicdn.com"
+- "+.g.alicdn.com"
 # IQIYI
 - "+.iqiyi.com"
 - "+.iq.com"
