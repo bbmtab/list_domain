@@ -153,7 +153,7 @@ payload:
 - "+.youku.com"
 - "+.bixi.alicdn.com"
 # IQIYI
-- "+.iqiyi.com
+- "+.iqiyi.com"
 - "+.iq.com"
 # &gt; Wiz smartgateway philips
 - DOMAIN-SUFFIX,wiz.world
