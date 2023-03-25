@@ -9,9 +9,9 @@ payload:
 - DOMAIN-SUFFIX,api.sent.tv
 - DOMAIN-SUFFIX,cdn01.mola.tv
 - DOMAIN-SUFFIX,cdn02.mola.tv
- # > JOOX
-  - DOMAIN-SUFFIX,joox.com
-  - DOMAIN-KEYWORD,jooxweb-api
+# > JOOX
+- DOMAIN-SUFFIX,joox.com
+- DOMAIN-KEYWORD,jooxweb-api
 # &gt; Netflix
 - DOMAIN-SUFFIX,flxvpn.net
 - DOMAIN-SUFFIX,netflix.ca
