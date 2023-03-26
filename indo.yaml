@@ -223,4 +223,4 @@ payload:
 - DOMAIN-KEYWORD,ponpes.id
 
 #Gdrive
-- "+.drive.google.com"
+#- "+.drive.google.com"
