@@ -13,6 +13,7 @@ payload:
 - DOMAIN-SUFFIX,cdn02.mola.tv
 # JOOX
 - "+.joox.com"
+- "+.api-jooxtt.sanook.com"
 - DOMAIN-KEYWORD,jooxweb-api
 # &gt; Netflix
 - DOMAIN-SUFFIX,flxvpn.net
