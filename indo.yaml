@@ -14,6 +14,7 @@ payload:
 # JOOX
 - "+.joox.com"
 - "+.api-jooxtt.sanook.com"
+- "203.205.234.136"
 - DOMAIN-KEYWORD,jooxweb-api
 # &gt; Netflix
 - DOMAIN-SUFFIX,flxvpn.net
