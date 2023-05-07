@@ -158,6 +158,7 @@ payload:
 - DOMAIN-KEYWORD,bilibili
 # Youku
 - "+.youku.com"
+- "+.youku.tv"
 - "+.bixi.alicdn.com"
 - "+.g.alicdn.com"
 # IQIYI
