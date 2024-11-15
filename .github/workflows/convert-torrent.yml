@@ -17,7 +17,7 @@ jobs:
           pip install pandas tldextract pyyaml openpyxl
 
       - name: Download and process source lists
-        working-directory: ./rule_provider
+        #working-directory: ./rule_provider
         run: |
           echo "Downloading Pi-hole Torrent Blocklist..."
           curl -sSf -o pi-hole-torrent.txt https://raw.githubusercontent.com/SM443/Pi-hole-Torrent-Blocklist/main/all-torrent-trackers.txt
