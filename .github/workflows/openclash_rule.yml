@@ -36,10 +36,14 @@ jobs:
               input_text = file.read()
 
           # Ekstraksi domain menggunakan regex
-          payload_lines = re.findall(r"^(?!#)([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})", input_text, re.MULTILINE)
+          #payload_lines = re.findall(r"^(?!#)([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})", input_text, re.MULTILINE)
 
           # Buat payload dengan format yang diinginkan
-          payload = [f"+.{line}" for line in payload_lines]
+          #payload = [f"+.{line}" for line in payload_lines]
+
+          # Ekstraksi domain hanya dua bagian terakhir (suffix) dengan regex
+          payload_lines = re.findall(r"[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", input_text)
+          suffix_only = [f"+.{'.'.join(line.split('.')[-2:])}" for line in payload_lines]
 
           # YAML output
           data = {"payload": payload}
