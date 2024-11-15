@@ -40,10 +40,11 @@ jobs:
         # Append the formatted list to your OpenClash YAML configuration file
         cat formatted-torrent-list.yaml >> tr-list.yaml
 
-    - name: Commit changes to the repository
+        - name: Commit changes to the repository
       uses: EndBug/add-and-commit@v9
       with:
         message: 'Update torrent blocklist'
         author_name: 'GitHub Action'
-        author_email: 'github-action@users.noreply.github.com'
+        author_email: 'github-actions@users.noreply.github.com'
+        token: ${{ secrets.GH_Token }}  # Use the secret PAT token here
         add: 'tr-list.yaml'
