@@ -20,7 +20,7 @@ jobs:
         #working-directory: ./rule_provider
         run: |
           echo "Downloading Pi-hole Torrent Blocklist..."
-          curl -sSf -o pi-hole-torrent.txt https://raw.githubusercontent.com/SM443/Pi-hole-Torrent-Blocklist/main/all-torrent-trackers.txt
+          curl -sSf -o pi-hole-torrent.txt https://raw.githubusercontent.com/im-sm/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt
           
           # Processing the torrent tracker list
           python3 - <<EOF
