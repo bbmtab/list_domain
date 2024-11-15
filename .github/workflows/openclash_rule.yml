@@ -30,8 +30,8 @@ jobs:
           with open("pi-hole-torrent.txt", "r") as file:
               input_text = file.read()
 
-          payload_lines = re.findall(r"^([a-zA-Z0-9.-]+)", input_text)
-          payload = [f'"+.{line}"' for line in payload_lines]
+          payload_lines = re.findall(r\"^([a-zA-Z0-9.-]+)\", input_text)
+          payload = [f\"+.{line.split('.')[-1]}\" for line in payload_lines]
 
           data = {
               "payload": payload
@@ -46,6 +46,63 @@ jobs:
           EOF
 
           rm pi-hole-torrent.txt
+          
+         echo "Downloading oisd nsfw source list..."
+          curl -sSf -o oisd-nsfw.txt https://nsfw.oisd.nl
+          python3 - <<EOF
+          import re
+          import yaml
+          
+          with open("oisd-nsfw.txt", "r") as file:
+              input_text = file.read()
+          
+          payload_lines = re.findall(r"\|\|(.+)\^", input_text)
+          payload = [f'"+.{line}"' for line in payload_lines]
+          
+          data = {
+              "payload": payload
+          }
+          
+          yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False)
+          
+          formatted_yaml = re.sub(r"(\s+-) '(.+)'", r"\1 \2", yaml_output)
+          
+          with open("nsfw.yaml", "w") as file:
+              file.write(formatted_yaml)
+          EOF
+          rm oisd-nsfw.txt
+
+          echo "Downloading Bank-ID source list"
+          python3 - <<EOF
+          import pandas as pd
+          import tldextract
+          import yaml
+          import re
+          
+          excel_url = "https://ojk.go.id/id/kanal/perbankan/data-dan-statistik/Documents/Pages/Daftar-Alamat-Kantor-Pusat-Bank-Umum-Dan-Syariah/Daftar%20Alamat%20Kantor%20Pusat%20Bank%20Umum%20Dan%20Syariah%20-%20Februari%202023.xlsx"
+          
+          # Read the Excel file
+          df = pd.read_excel(excel_url)
+          
+          # Extract valid domain TLDs
+          valid_tlds = []
+          for website in df["Website"].dropna():
+              domain = tldextract.extract(website).registered_domain
+              if domain:
+                  valid_tlds.append(f'"+.{domain}"')
+          
+          # Create the data dictionary
+          data = {"payload": valid_tlds}
+          
+          # Convert the data to YAML format
+          yaml_output = yaml.dump(data, sort_keys=False)
+          formatted_yaml = re.sub(r"(\s+-) '(.+)'", r"\1 \2", yaml_output)
+          
+          # Save the formatted YAML to a file
+          output_file = "bank.yaml"
+          with open(output_file, "w") as file:
+              file.write(formatted_yaml)
+            
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
