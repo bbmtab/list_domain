@@ -40,11 +40,9 @@ jobs:
         # Append the formatted list to your OpenClash YAML configuration file
         cat formatted-torrent-list.yaml >> tr-site.yaml
 
-    - name: Commit changes to the repository
-      uses: EndBug/add-and-commit@v9
-      with:
-        message: 'Update torrent blocklist'
-        author_name: 'GitHub Action'
-        author_email: 'github-actions@users.noreply.github.com'
-        add: 'tr-site.yaml'
-        token: ${{ secrets.GH-Token }}  # Use the secret GH-Token here
+     - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Automatic update Rule Provider Clash'
+          commit_author: 'GitHub Actions <github-actions@users.noreply.github.com>'
+          branch: 'main'  # Ensure the correct branch is specified (use 'main' or 'master')
+          token: ${{ secrets.GH-Token }}  # Use the token from secrets
