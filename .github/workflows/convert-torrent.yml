@@ -36,7 +36,7 @@ jobs:
 
     - name: Update OpenClash YAML
       run: |
-        # Assuming the OpenClash YAML file is 'openclash-site-list.yaml'
+        # Assuming the OpenClash YAML file is 'tr-list'
         # Append the formatted list to your OpenClash YAML configuration file
         cat formatted-torrent-list.yaml >> tr-list.yaml
 
@@ -46,4 +46,4 @@ jobs:
         message: 'Update torrent blocklist'
         author_name: 'GitHub Action'
         author_email: 'github-action@users.noreply.github.com'
-        add: 'openclash-site-list.yaml'
+        add: 'tr-list.yaml'
