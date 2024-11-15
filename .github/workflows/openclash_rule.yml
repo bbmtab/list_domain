@@ -58,7 +58,7 @@ jobs:
           rm pi-hole-torrent.txt
 
           echo "Downloading Pi-hole Torrent Web Blocklist..."
-          curl -sSf -o pi-hole-torrent.txt https://raw.githubusercontent.com/im-sm/Pi-hole-Torrent-Blocklist/main/all-torrent-websites.txt
+          curl -sSf -o pi-hole-web-torrent.txt https://raw.githubusercontent.com/im-sm/Pi-hole-Torrent-Blocklist/main/all-torrent-websites.txt
 
           if [ ! -f pi-hole-web-torrent.txt ]; then
               echo "Failed to download the torrent blocklist."
