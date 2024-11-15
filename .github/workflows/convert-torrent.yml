@@ -1,20 +1,19 @@
-name: Update Torrent Blocklist
+name: Rule Provider
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC (optional)
-  push:
-    branches:
-      - main
+    - cron: '0 20 * * *'  # Run daily at 20:00 UTC
+  workflow_dispatch:
 
 jobs:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v3
+      - name: Checkout the repository
+        uses: actions/checkout@v3
 
-    - name: Fetch torrent blocklist
+      - name: Fetch torrent blocklist
       run: |
         # Download the list of trackers from the Pi-hole repository
         curl -o torrent-trackers.txt https://raw.githubusercontent.com/SM443/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt
