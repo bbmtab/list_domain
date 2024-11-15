@@ -35,10 +35,11 @@ jobs:
           with open("pi-hole-torrent.txt", "r") as file:
               input_text = file.read()
 
-          # Extract valid domain lines, ignoring comments and invalid formats
+          # Ekstraksi domain menggunakan regex
           payload_lines = re.findall(r"^(?!#)([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})", input_text, re.MULTILINE)
-          # Create payload list without duplicates
-          payload = sorted({f"+.{line.split('.')[-1]}" for line in payload_lines})
+
+          # Buat payload dengan format yang diinginkan
+          payload = [f"+.{line}" for line in payload_lines]
 
           # YAML output
           data = {"payload": payload}
