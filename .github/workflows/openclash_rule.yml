@@ -41,7 +41,7 @@ jobs:
 
           formatted_yaml = re.sub(r"(\s+-) '(.+)'", r"\1 \2", yaml_output)
 
-          with open("tr-site.yaml", "w") as file:
+          with open("tracker-site.yaml", "w") as file:
               file.write(formatted_yaml)
           EOF
 
