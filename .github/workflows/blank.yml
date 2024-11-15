@@ -1,0 +1,49 @@
+name: Update Torrent Blocklist
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC (optional)
+  push:
+    branches:
+      - main
+
+jobs:
+  update-torrent-list:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Fetch torrent blocklist
+      run: |
+        # Download the list of trackers from the Pi-hole repository
+        curl -o torrent-trackers.txt https://raw.githubusercontent.com/SM443/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt
+
+    - name: Convert to OpenClash format
+      run: |
+        # Create an empty file to store the formatted list
+        echo "# Formatted Torrent List" > formatted-torrent-list.yaml
+
+        # Loop through each line of the torrent-trackers.txt and format it
+        while IFS= read -r line; do
+          # Skip empty lines or lines starting with a number or a comment
+          if [[ ! "$line" =~ ^# && -n "$line" ]]; then
+            # Add '+' to the domain and append it to the formatted file
+            echo "+.$line" >> formatted-torrent-list.yaml
+          fi
+        done < torrent-trackers.txt
+
+    - name: Update OpenClash YAML
+      run: |
+        # Assuming the OpenClash YAML file is 'openclash-site-list.yaml'
+        # Append the formatted list to your OpenClash YAML configuration file
+        cat formatted-torrent-list.yaml >> tr-list.yaml
+
+    - name: Commit changes to the repository
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: 'Update torrent blocklist'
+        author_name: 'GitHub Action'
+        author_email: 'github-action@users.noreply.github.com'
+        add: 'openclash-site-list.yaml'
