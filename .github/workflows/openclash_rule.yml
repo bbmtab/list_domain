@@ -23,29 +23,22 @@ jobs:
           curl -sSf -o pi-hole-torrent.txt https://raw.githubusercontent.com/im-sm/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt
           
           # Processing the torrent tracker list
-          python3 - <<EOF
+          python3 - \u003c\u003cEOF
           import re
           import yaml
-
-          with open("pi-hole-torrent.txt", "r") as file:
+          with open(\"pi-hole-torrent.txt\", \"r\") as file:
               input_text = file.read()
-
-          payload_lines = re.findall(r\"^([a-zA-Z0-9.-]+)\", input_text)
-          payload = [f\"+.{line.split('.')[-1]}\" for line in payload_lines]
-
+          payload_lines = re.findall(r\\\"^([a-zA-Z0-9.-]+)\\\", input_text)
+          payload = [f\\\"+.{line.split('.')[-1]}\\\" for line in payload_lines]
           data = {
-              "payload": payload
+              \"payload\": payload
           }
-
           yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False)
-
-          formatted_yaml = re.sub(r"(\s+-) '(.+)'", r"\1 \2", yaml_output)
-
-          with open("tracker-site.yaml", "w") as file:
-              file.write(formatted_yaml)
+          with open(\"tracker-site.yaml\", \"w\") as file:
+              file.write(yaml_output)
           EOF
-
           rm pi-hole-torrent.txt
+
           
           echo "Downloading oisd nsfw source list..."
           curl -sSf -o oisd-nsfw.txt https://nsfw.oisd.nl
