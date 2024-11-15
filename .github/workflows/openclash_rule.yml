@@ -50,7 +50,7 @@ jobs:
           #yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False)
           # Simpan hasil ke file YAML
           data = {"payload": sorted(set(suffix_only))}  # Hilangkan duplikasi
-          yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False)
+          yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False, default_style='"')
 
           with open("tracker-site.yaml", "w") as file:
               file.write(yaml_output)
@@ -81,7 +81,7 @@ jobs:
           
           # Simpan hasil ke file YAML
           data = {"payload": sorted(set(suffix_only))}  # Hilangkan duplikasi
-          yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False)
+          yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False, default_style='"')
 
           with open("tr-site.yaml", "w") as file:
               file.write(yaml_output)
