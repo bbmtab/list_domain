@@ -47,7 +47,7 @@ jobs:
 
           rm pi-hole-torrent.txt
           
-         echo "Downloading oisd nsfw source list..."
+          echo "Downloading oisd nsfw source list..."
           curl -sSf -o oisd-nsfw.txt https://nsfw.oisd.nl
           python3 - <<EOF
           import re
