@@ -47,14 +47,9 @@ jobs:
 
           rm pi-hole-torrent.txt
 
-      - name: Commit changes to the repository
-        uses: EndBug/add-and-commit@v9
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          message: 'Update tr-site.yaml with the latest torrent blocklist'
-          author_name: 'GitHub Action'
-          author_email: 'github-actions@users.noreply.github.com'
-          add: 'tr-site.yaml'
-          token: ${{ secrets.GH_TOKEN }}
+          commit_message: Automatic update Rule Provider Clash
           
       - name: Push changes to the repository
         run: git push
