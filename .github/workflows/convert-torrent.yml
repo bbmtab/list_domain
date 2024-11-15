@@ -2,45 +2,59 @@ name: Rule Provider
 
 on:
   schedule:
-    - cron: '0 20 * * *'  # Run daily at 20:00 UTC
+    - cron: '0 20 * * *'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Fetch torrent blocklist
-      run: |
-        # Download the list of trackers from the Pi-hole repository
-        curl -o torrent-trackers.txt https://raw.githubusercontent.com/SM443/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas tldextract pyyaml openpyxl
 
-    - name: Convert to OpenClash format
-      run: |
-        # Create an empty file to store the formatted list
-        echo "# Formatted Torrent List" > formatted-torrent-list.yaml
+      - name: Download and process source lists
+        working-directory: ./rule_provider
+        run: |
+          echo "Downloading Pi-hole Torrent Blocklist..."
+          curl -sSf -o pi-hole-torrent.txt https://raw.githubusercontent.com/SM443/Pi-hole-Torrent-Blocklist/main/all-torrent-trackers.txt
+          
+          # Processing the torrent tracker list
+          python3 - <<EOF
+          import re
+          import yaml
 
-        # Loop through each line of the torrent-trackers.txt and format it
-        while IFS= read -r line; do
-          # Skip empty lines or lines starting with a number or a comment
-          if [[ ! "$line" =~ ^# && -n "$line" ]]; then
-            # Add '+' to the domain and append it to the formatted file
-            echo "+.$line" >> formatted-torrent-list.yaml
-          fi
-        done < torrent-trackers.txt
+          with open("pi-hole-torrent.txt", "r") as file:
+              input_text = file.read()
 
-    - name: Update tr-site.yaml
-      run: |
-        # Assuming the OpenClash YAML file is 'tr-site.yaml'
-        # Append the formatted list to your OpenClash YAML configuration file
-        cat formatted-torrent-list.yaml >> tr-site.yaml
+          payload_lines = re.findall(r"^([a-zA-Z0-9.-]+)", input_text)
+          payload = [f'"+.{line}"' for line in payload_lines]
 
-     - uses: stefanzweifel/git-auto-commit-action@v4
+          data = {
+              "payload": payload
+          }
+
+          yaml_output = yaml.dump(data, sort_keys=False, default_flow_style=False)
+
+          formatted_yaml = re.sub(r"(\s+-) '(.+)'", r"\1 \2", yaml_output)
+
+          with open("tr-site.yaml", "w") as file:
+              file.write(formatted_yaml)
+          EOF
+
+          rm pi-hole-torrent.txt
+
+      - name: Commit changes to the repository
+        uses: EndBug/add-and-commit@v9
         with:
-          commit_message: 'Automatic update Rule Provider Clash'
-          commit_author: 'GitHub Actions <github-actions@users.noreply.github.com>'
-          branch: 'main'  # Ensure the correct branch is specified (use 'main' or 'master')
-          token: ${{ secrets.GH-Token }}  # Use the token from secrets
+          message: 'Update tr-site.yaml with the latest torrent blocklist'
+          author_name: 'GitHub Action'
+          author_email: 'github-actions@users.noreply.github.com'
+          add: 'tr-site.yaml'
+          token: ${{ secrets.GH_TOKEN }}
+          
+      - name: Push changes to the repository
+        run: git push
