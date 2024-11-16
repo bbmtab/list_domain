@@ -21,4 +21,4 @@ payload:
 - "+.*.vip"
 - "+.mypikpak.com"
 - "+.akamaized.net"
-"+.drive.usercontent.google.com"
+- "+.drive.usercontent.google.com"
