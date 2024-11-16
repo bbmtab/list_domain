@@ -231,6 +231,6 @@ payload:
 #Gdrive
 #- "+.drive.google.com"
 - "+.googleapis.com"
-- "+.drive.usercontent.google.com"
+#- "+.drive.usercontent.google.com"
 #worker
 - "+.workers.dev"
