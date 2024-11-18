@@ -18,7 +18,7 @@ payload:
 - "+.domp4.net"
 - "+.anchin.vip"
 - "+.animexin.vip"
-- "+.*.vip"
+#- "+.*.vip"
 - "+.mypikpak.com"
 - "+.akamaized.net"
 - "+.drive.usercontent.google.com"
