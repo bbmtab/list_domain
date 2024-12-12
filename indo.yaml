@@ -228,7 +228,8 @@ payload:
 - DOMAIN-KEYWORD,desa.id
 - DOMAIN-KEYWORD,ponpes.id
 - DOMAIN-SUFFIX,binamulia.online
-
+#docker
+- DOMAIN-KEYWORD,docker
 
 #Gdrive
 #- "+.drive.google.com"
