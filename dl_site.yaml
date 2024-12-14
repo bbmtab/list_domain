@@ -22,6 +22,7 @@ payload:
 #- "+.mypikpak.com"
 - "+.akamaized.net"
 - "+.drive.usercontent.google.com"
+- "+.drive-data-export.usercontent.google.com"
 - "+.windows.com"
 - "+.windowsupdate.com"
 - "+.microsoft.com"
